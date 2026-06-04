@@ -45,6 +45,43 @@ Desenvolver e implantar uma aplicação web que permita à instituição gerenci
 - Banco de dados: em memória (MVP) / a migrar para banco relacional
 - Editor: VS Code
 
+## Como rodar
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/) v18+
+
+### Back-end
+
+```bash
+cd backend
+npm install
+npm run dev     # desenvolvimento (nodemon)
+# ou
+npm start       # produção
+```
+
+O servidor sobe em `http://localhost:3000`.
+
+### Rotas disponíveis
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET | `/api/participantes` | Lista todos os participantes |
+| POST | `/api/participantes` | Cria um participante |
+| PUT | `/api/participantes/:id` | Atualiza um participante |
+| DELETE | `/api/participantes/:id` | Remove um participante |
+| GET | `/api/oficinas` | Lista todas as oficinas |
+| POST | `/api/oficinas` | Cria uma oficina |
+| PUT | `/api/oficinas/:id` | Atualiza uma oficina |
+| DELETE | `/api/oficinas/:id` | Remove uma oficina |
+| GET | `/api/presencas/oficina/:id` | Presenças de uma oficina |
+| GET | `/api/presencas/participante/:id` | Presenças de um participante |
+| POST | `/api/presencas` | Registra uma presença |
+| DELETE | `/api/presencas/:id` | Remove um registro de presença |
+
+> Os dados são mantidos em memória e são resetados ao reiniciar o servidor.
+
 ## Avaliação
 
 Relato da equipe da instituição sobre a usabilidade do sistema + formulário de feedback via Google Forms aplicado após a apresentação.
