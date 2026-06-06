@@ -3,7 +3,7 @@ class Progresso {
     this.id = id;
     this.participanteId = participanteId;
     this.oficinaId = oficinaId;
-    this.nota = nota || null;           // avaliação qualitativa ou numérica
+    this.nota = nota || null;           // avaliação qualitativa (pode ser númerica)
     this.observacoes = observacoes || null;
     this.registradoEm = new Date().toISOString();
   }
