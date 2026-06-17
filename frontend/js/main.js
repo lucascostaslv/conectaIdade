@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'http://localhost:3000/api';
 
 async function api(method, caminho, corpo) {
   const opcoes = { method, headers: {} };
