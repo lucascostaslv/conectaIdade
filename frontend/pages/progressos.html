@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Presenças — Inclusão Digital</title>
+  <title>Progressos — Inclusão Digital</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -13,16 +13,17 @@
       <a href="../index.html">Início</a>
       <a href="participantes.html">Participantes</a>
       <a href="oficinas.html">Oficinas</a>
-      <a href="presencas.html" class="ativo">Presenças</a>
-      <a href="progressos.html">Progressos</a>
+      <a href="presencas.html">Presenças</a>
+      <a href="progressos.html" class="ativo">Progressos</a>
     </nav>
   </header>
 
   <main>
-    <h2>Presenças</h2>
+    <h2>Progressos</h2>
     <div id="mensagem" class="msg" hidden></div>
 
     <form class="form" id="form">
+      <input type="hidden" id="editId" />
       <div class="campo">
         <label for="participante">Participante *</label>
         <select id="participante"></select>
@@ -32,29 +33,27 @@
         <select id="oficina"></select>
       </div>
       <div class="campo">
-        <label for="data">Data *</label>
-        <input type="date" id="data" />
+        <label for="nota">Nota / avaliação</label>
+        <input type="text" id="nota" placeholder="Ex.: Ótimo, Bom, 9..." />
       </div>
       <div class="campo">
-        <label for="presente">Situação *</label>
-        <select id="presente">
-          <option value="true">Compareceu</option>
-          <option value="false">Faltou</option>
-        </select>
+        <label for="observacoes">Observações</label>
+        <textarea id="observacoes"></textarea>
       </div>
       <div class="acoes-form">
-        <button type="submit" class="btn btn-primario">Registrar presença</button>
+        <button type="submit" class="btn btn-primario" id="btnSalvar">Registrar progresso</button>
+        <button type="button" class="btn btn-secundario" id="btnCancelar" hidden>Cancelar</button>
       </div>
     </form>
 
     <div class="filtro">
       <div class="campo">
-        <label for="filtroOficina">Filtrar por oficina</label>
-        <select id="filtroOficina"></select>
-      </div>
-      <div class="campo">
         <label for="filtroParticipante">Filtrar por participante</label>
         <select id="filtroParticipante"></select>
+      </div>
+      <div class="campo">
+        <label for="filtroOficina">Filtrar por oficina</label>
+        <select id="filtroOficina"></select>
       </div>
     </div>
 
@@ -62,6 +61,6 @@
   </main>
 
   <script src="../js/main.js"></script>
-  <script src="../js/presencas.js"></script>
+  <script src="../js/progressos.js"></script>
 </body>
 </html>

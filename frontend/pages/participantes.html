@@ -9,7 +9,57 @@
 <body>
   <header>
     <h1>Gestão de Oficinas de Inclusão Digital</h1>
+    <nav>
+      <a href="../index.html">Início</a>
+      <a href="participantes.html" class="ativo">Participantes</a>
+      <a href="oficinas.html">Oficinas</a>
+      <a href="presencas.html">Presenças</a>
+      <a href="progressos.html">Progressos</a>
+    </nav>
   </header>
+
+  <main>
+    <h2>Participantes</h2>
+    <div id="mensagem" class="msg" hidden></div>
+
+    <form class="form" id="form">
+      <input type="hidden" id="editId" />
+      <div class="campo">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" />
+      </div>
+      <div class="campo">
+        <label for="dataNascimento">Data de nascimento *</label>
+        <input type="date" id="dataNascimento" />
+      </div>
+      <div class="campo">
+        <label for="telefone">Telefone</label>
+        <input type="text" id="telefone" placeholder="(00) 00000-0000" />
+      </div>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" />
+      </div>
+      <div class="campo">
+        <label for="observacoes">Observações</label>
+        <textarea id="observacoes"></textarea>
+      </div>
+      <p class="dica">Informe pelo menos telefone ou e-mail.</p>
+      <div class="acoes-form">
+        <button type="submit" class="btn btn-primario" id="btnSalvar">Adicionar</button>
+        <button type="button" class="btn btn-secundario" id="btnCancelar" hidden>Cancelar</button>
+      </div>
+    </form>
+
+    <div class="filtro">
+      <div class="campo">
+        <label for="busca">Buscar por nome</label>
+        <input type="text" id="busca" placeholder="Digite um nome..." />
+      </div>
+    </div>
+
+    <ul class="lista" id="lista"></ul>
+  </main>
 
   <script src="../js/main.js"></script>
   <script src="../js/participantes.js"></script>

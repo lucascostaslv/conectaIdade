@@ -1,0 +1,300 @@
+:root {
+  --verde: #15803d;
+  --verde-escuro: #166534;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --texto: #1f2937;
+  --texto-suave: #6b7280;
+  --borda: #e5e7eb;
+  --erro: #b91c1c;
+  --erro-bg: #fef2f2;
+  --erro-borda: #fecaca;
+  --ok-bg: #f0fdf4;
+  --ok-borda: #bbf7d0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--bg);
+}
+
+header {
+  background: var(--card);
+  border-bottom: 2px solid var(--borda);
+  padding: 16px 24px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  color: var(--verde-escuro);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--verde);
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background: var(--ok-bg);
+}
+
+nav a.ativo {
+  background: var(--verde);
+  color: #fff;
+}
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+.intro {
+  margin: 0 0 20px;
+}
+
+.msg {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.msg.ok {
+  background: var(--ok-bg);
+  color: var(--verde-escuro);
+  border: 1px solid var(--ok-borda);
+}
+
+.msg.erro {
+  background: var(--erro-bg);
+  color: var(--erro);
+  border: 1px solid var(--erro-borda);
+}
+
+.form {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.campo {
+  margin-bottom: 14px;
+}
+
+.campo label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 17px;
+  font-family: inherit;
+  color: var(--texto);
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+}
+
+.campo textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.dica {
+  color: var(--texto-suave);
+  font-size: 15px;
+  margin: -4px 0 14px;
+}
+
+.acoes-form {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-primario {
+  background: var(--verde);
+  color: #fff;
+}
+
+.btn-primario:hover {
+  background: var(--verde-escuro);
+}
+
+.btn-secundario {
+  background: #fff;
+  color: var(--texto);
+  border-color: var(--borda);
+}
+
+.btn-secundario:hover {
+  background: var(--bg);
+}
+
+.filtro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filtro .campo {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 180px;
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-info .titulo {
+  font-weight: 600;
+}
+
+.item-info .detalhe {
+  color: var(--texto-suave);
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.item-acoes {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.btn-link.editar {
+  color: var(--verde);
+}
+
+.btn-link.editar:hover {
+  background: var(--ok-bg);
+}
+
+.btn-link.excluir {
+  color: var(--erro);
+}
+
+.btn-link.excluir:hover {
+  background: var(--erro-bg);
+}
+
+.vazio {
+  color: var(--texto-suave);
+  padding: 20px;
+  text-align: center;
+}
+
+#resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.card-resumo {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 18px 22px;
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+
+.card-resumo .numero {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.card-resumo .rotulo {
+  color: var(--texto-suave);
+}
+
+@media (max-width: 520px) {
+  .item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .item-acoes {
+    justify-content: flex-end;
+  }
+}

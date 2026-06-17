@@ -9,7 +9,60 @@
 <body>
   <header>
     <h1>Gestão de Oficinas de Inclusão Digital</h1>
+    <nav>
+      <a href="../index.html">Início</a>
+      <a href="participantes.html">Participantes</a>
+      <a href="oficinas.html" class="ativo">Oficinas</a>
+      <a href="presencas.html">Presenças</a>
+      <a href="progressos.html">Progressos</a>
+    </nav>
   </header>
+
+  <main>
+    <h2>Oficinas</h2>
+    <div id="mensagem" class="msg" hidden></div>
+
+    <form class="form" id="form">
+      <input type="hidden" id="editId" />
+      <div class="campo">
+        <label for="titulo">Título *</label>
+        <input type="text" id="titulo" />
+      </div>
+      <div class="campo">
+        <label for="educador">Educador *</label>
+        <input type="text" id="educador" />
+      </div>
+      <div class="campo">
+        <label for="dataInicio">Data de início *</label>
+        <input type="date" id="dataInicio" />
+      </div>
+      <div class="campo">
+        <label for="dataFim">Data de término</label>
+        <input type="date" id="dataFim" />
+      </div>
+      <div class="campo">
+        <label for="cargaHoraria">Carga horária (horas) *</label>
+        <input type="number" id="cargaHoraria" min="1" />
+      </div>
+      <div class="campo">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao"></textarea>
+      </div>
+      <div class="acoes-form">
+        <button type="submit" class="btn btn-primario" id="btnSalvar">Adicionar</button>
+        <button type="button" class="btn btn-secundario" id="btnCancelar" hidden>Cancelar</button>
+      </div>
+    </form>
+
+    <div class="filtro">
+      <div class="campo">
+        <label for="busca">Buscar por título</label>
+        <input type="text" id="busca" placeholder="Digite um título..." />
+      </div>
+    </div>
+
+    <ul class="lista" id="lista"></ul>
+  </main>
 
   <script src="../js/main.js"></script>
   <script src="../js/oficinas.js"></script>
