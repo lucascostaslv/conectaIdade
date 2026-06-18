@@ -1,11 +1,12 @@
-class Presenca {
-  constructor({ id, participanteId, oficinaId, data, presente }) {
-    this.id = id;
-    this.participanteId = participanteId;
-    this.oficinaId = oficinaId;
-    this.data = data;         //Formato "YYYY-MM-DD"
-    this.presente = presente; // booleano
-  }
-}
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/connection');
+
+const Presenca = sequelize.define('Presenca', {
+  data:     { type: DataTypes.DATEONLY, allowNull: false },
+  presente: { type: DataTypes.BOOLEAN,  allowNull: false },
+}, {
+  tableName: 'presencas',
+  timestamps: false,
+});
 
 module.exports = Presenca;

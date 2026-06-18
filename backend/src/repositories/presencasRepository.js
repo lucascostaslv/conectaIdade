@@ -1,26 +1,20 @@
-const Presenca = require('../models/Presenca');
-
-let presencas = [];
-let nextId = 1;
+const { Presenca } = require('../models');
 
 module.exports = {
-  findAll: () => presencas,
+  findAll: () => Presenca.findAll(),
 
-  findByOficina: (oficinaId) => presencas.filter((p) => p.oficinaId === oficinaId),
+  findById: (id) => Presenca.findByPk(id),
 
-  findByParticipante: (participanteId) =>
-    presencas.filter((p) => p.participanteId === participanteId),
+  findByOficina: (oficinaId) => Presenca.findAll({ where: { oficinaId } }),
 
-  create: (dados) => {
-    const presenca = new Presenca({ id: nextId++, ...dados });
-    presencas.push(presenca);
-    return presenca;
-  },
+  findByParticipante: (participanteId) => Presenca.findAll({ where: { participanteId } }),
 
-  remove: (id) => {
-    const index = presencas.findIndex((p) => p.id === id);
-    if (index === -1) return false;
-    presencas.splice(index, 1);
+  create: (dados) => Presenca.create(dados),
+
+  remove: async (id) => {
+    const item = await Presenca.findByPk(id);
+    if (!item) return false;
+    await item.destroy();
     return true;
   },
 };

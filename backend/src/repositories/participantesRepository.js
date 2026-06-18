@@ -1,30 +1,27 @@
-const Participante = require('../models/Participante');
-
-let participantes = [];
-let nextId = 1;
+const { Op } = require('sequelize');
+const { Participante } = require('../models');
 
 module.exports = {
-  findAll: () => participantes,
-
-  findById: (id) => participantes.find((p) => p.id === id),
-
-  create: (dados) => {
-    const participante = new Participante({ id: nextId++, ...dados });
-    participantes.push(participante);
-    return participante;
+  findAll: (filtros = {}) => {
+    const where = {};
+    if (filtros.nome) where.nome = { [Op.like]: `%${filtros.nome}%` };
+    return Participante.findAll({ where });
   },
 
-  update: (id, dados) => {
-    const index = participantes.findIndex((p) => p.id === id);
-    if (index === -1) return null;
-    participantes[index] = { ...participantes[index], ...dados };
-    return participantes[index];
+  findById: (id) => Participante.findByPk(id),
+
+  create: (dados) => Participante.create(dados),
+
+  update: async (id, dados) => {
+    const item = await Participante.findByPk(id);
+    if (!item) return null;
+    return item.update(dados);
   },
 
-  remove: (id) => {
-    const index = participantes.findIndex((p) => p.id === id);
-    if (index === -1) return false;
-    participantes.splice(index, 1);
+  remove: async (id) => {
+    const item = await Participante.findByPk(id);
+    if (!item) return false;
+    await item.destroy();
     return true;
   },
 };

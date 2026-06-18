@@ -1,16 +1,15 @@
-class Oficina {
-  constructor({ id, titulo, descricao, educador, dataInicio, dataFim, cargaHoraria }) {
-    this.id = id;
-    this.titulo = titulo;
-    this.descricao = descricao || null;
-    this.educador = educador;
-    this.dataInicio = dataInicio; //Formato "YYYY-MM-DD"
-    this.dataFim = dataFim;       //Formato "YYYY-MM-DD"
-    this.cargaHoraria = cargaHoraria; // em horas
-    this.criadoEm = new Date().toISOString();
-  }
-}
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/connection');
 
-// SEQUELIZE
+const Oficina = sequelize.define('Oficina', {
+  titulo:       { type: DataTypes.STRING,  allowNull: false },
+  descricao:    { type: DataTypes.TEXT },
+  educador:     { type: DataTypes.STRING,  allowNull: false },
+  dataInicio:   { type: DataTypes.DATEONLY, allowNull: false },
+  dataFim:      { type: DataTypes.DATEONLY },
+  cargaHoraria: { type: DataTypes.FLOAT,   allowNull: false },
+}, {
+  tableName: 'oficinas',
+});
 
 module.exports = Oficina;

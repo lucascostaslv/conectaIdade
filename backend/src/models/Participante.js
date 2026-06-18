@@ -1,13 +1,14 @@
-class Participante {
-  constructor({ id, nome, telefone, email, dataNascimento, observacoes }) {
-    this.id = id;
-    this.nome = nome;
-    this.telefone = telefone;
-    this.email = email;
-    this.dataNascimento = dataNascimento; //Formato "YYYY-MM-DD"
-    this.observacoes = observacoes || null;
-    this.criadoEm = new Date().toISOString();
-  }
-}
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/connection');
+
+const Participante = sequelize.define('Participante', {
+  nome:           { type: DataTypes.STRING,  allowNull: false },
+  telefone:       { type: DataTypes.STRING },
+  email:          { type: DataTypes.STRING },
+  dataNascimento: { type: DataTypes.DATEONLY, allowNull: false },
+  observacoes:    { type: DataTypes.TEXT },
+}, {
+  tableName: 'participantes',
+});
 
 module.exports = Participante;

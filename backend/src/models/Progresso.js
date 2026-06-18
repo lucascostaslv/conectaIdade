@@ -1,12 +1,11 @@
-class Progresso {
-  constructor({ id, participanteId, oficinaId, nota, observacoes }) {
-    this.id = id;
-    this.participanteId = participanteId;
-    this.oficinaId = oficinaId;
-    this.nota = nota || null;           // avaliação qualitativa (pode ser númerica)
-    this.observacoes = observacoes || null;
-    this.registradoEm = new Date().toISOString();
-  }
-}
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/connection');
+
+const Progresso = sequelize.define('Progresso', {
+  nota:        { type: DataTypes.STRING },
+  observacoes: { type: DataTypes.TEXT },
+}, {
+  tableName: 'progressos',
+});
 
 module.exports = Progresso;

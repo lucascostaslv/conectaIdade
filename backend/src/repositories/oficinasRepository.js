@@ -1,30 +1,27 @@
-const Oficina = require('../models/Oficina');
-
-let oficinas = [];
-let nextId = 1;
+const { Op } = require('sequelize');
+const { Oficina } = require('../models');
 
 module.exports = {
-  findAll: () => oficinas,
-
-  findById: (id) => oficinas.find((o) => o.id === id),
-
-  create: (dados) => {
-    const oficina = new Oficina({ id: nextId++, ...dados });
-    oficinas.push(oficina);
-    return oficina;
+  findAll: (filtros = {}) => {
+    const where = {};
+    if (filtros.titulo) where.titulo = { [Op.like]: `%${filtros.titulo}%` };
+    return Oficina.findAll({ where });
   },
 
-  update: (id, dados) => {
-    const index = oficinas.findIndex((o) => o.id === id);
-    if (index === -1) return null;
-    oficinas[index] = { ...oficinas[index], ...dados };
-    return oficinas[index];
+  findById: (id) => Oficina.findByPk(id),
+
+  create: (dados) => Oficina.create(dados),
+
+  update: async (id, dados) => {
+    const item = await Oficina.findByPk(id);
+    if (!item) return null;
+    return item.update(dados);
   },
 
-  remove: (id) => {
-    const index = oficinas.findIndex((o) => o.id === id);
-    if (index === -1) return false;
-    oficinas.splice(index, 1);
+  remove: async (id) => {
+    const item = await Oficina.findByPk(id);
+    if (!item) return false;
+    await item.destroy();
     return true;
   },
 };

@@ -1,36 +1,26 @@
-const Progresso = require('../models/Progresso');
-
-let progressos = [];
-let nextId = 1;
+const { Progresso } = require('../models');
 
 module.exports = {
-  findAll: () => progressos,
+  findAll: () => Progresso.findAll(),
 
-  findById: (id) => progressos.find((p) => p.id === id),
+  findById: (id) => Progresso.findByPk(id),
 
-  findByParticipante: (participanteId) =>
-    progressos.filter((p) => p.participanteId === participanteId),
+  findByParticipante: (participanteId) => Progresso.findAll({ where: { participanteId } }),
 
-  findByOficina: (oficinaId) =>
-    progressos.filter((p) => p.oficinaId === oficinaId),
+  findByOficina: (oficinaId) => Progresso.findAll({ where: { oficinaId } }),
 
-  create: (dados) => {
-    const progresso = new Progresso({ id: nextId++, ...dados });
-    progressos.push(progresso);
-    return progresso;
+  create: (dados) => Progresso.create(dados),
+
+  update: async (id, dados) => {
+    const item = await Progresso.findByPk(id);
+    if (!item) return null;
+    return item.update(dados);
   },
 
-  update: (id, dados) => {
-    const index = progressos.findIndex((p) => p.id === id);
-    if (index === -1) return null;
-    progressos[index] = { ...progressos[index], ...dados };
-    return progressos[index];
-  },
-
-  remove: (id) => {
-    const index = progressos.findIndex((p) => p.id === id);
-    if (index === -1) return false;
-    progressos.splice(index, 1);
+  remove: async (id) => {
+    const item = await Progresso.findByPk(id);
+    if (!item) return false;
+    await item.destroy();
     return true;
   },
 };
