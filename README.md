@@ -42,45 +42,121 @@ Desenvolver e implantar uma aplicação web que permita à instituição gerenci
 
 - Front-end: HTML + CSS + JavaScript puro
 - Back-end: Node.js + Express
-- Banco de dados: em memória (MVP) / a migrar para banco relacional
+- Banco de dados: SQLite via Sequelize
 - Editor: VS Code
+
+---
 
 ## Como rodar
 
 ### Pré-requisitos
 
-- [Node.js](https://nodejs.org/) v18+
+- [Node.js](https://nodejs.org/) v18 ou superior
+- Nenhum banco de dados externo necessário — o SQLite é um arquivo local criado automaticamente
 
-### Back-end
+### 1. Instalar dependências
 
 ```bash
 cd backend
 npm install
-npm run dev     # desenvolvimento (nodemon)
-# ou
-npm start       # produção
 ```
 
-O servidor sobe em `http://localhost:3000`.
+### 2. Configurar variáveis de ambiente (opcional)
 
-### Rotas disponíveis
+```bash
+# Copie o arquivo de exemplo
+cp .env.example .env
+```
+
+O único campo disponível é `PORT` (padrão `3000`). Se não criar o `.env`, o servidor sobe normalmente na porta 3000.
+
+### 3. Rodar o servidor
+
+```bash
+# Modo desenvolvimento — reinicia automaticamente ao salvar
+npm run dev
+
+# Modo produção
+npm start
+```
+
+Na primeira execução o Sequelize cria o arquivo `database.sqlite` e as tabelas automaticamente. Nenhum comando extra de migração é necessário.
+
+### 4. Abrir o sistema
+
+Acesse **http://localhost:3000** no navegador.
+
+> Se estiver usando o Live Server do VS Code (porta 5500), o sistema ainda funciona — as chamadas de API apontam diretamente para `http://localhost:3000/api`. O servidor Express precisa estar rodando em paralelo.
+
+---
+
+## Estrutura do projeto
+
+```
+backend/
+├── server.js                   # Ponto de entrada — sincroniza o banco e sobe o Express
+├── database.sqlite             # Banco de dados SQLite (gerado automaticamente, não versionado)
+├── .env.example                # Variáveis de ambiente disponíveis
+└── src/
+    ├── app.js                  # Configuração do Express (middlewares, rotas, CORS)
+    ├── database/
+    │   └── connection.js       # Instância do Sequelize
+    ├── models/
+    │   ├── index.js            # Registra associações entre entidades
+    │   ├── Participante.js
+    │   ├── Oficina.js
+    │   ├── Presenca.js
+    │   └── Progresso.js
+    ├── repositories/           # Camada de acesso ao banco (wraps do Sequelize)
+    ├── controllers/            # Validação de entrada e respostas HTTP
+    └── routes/                 # Mapeamento de verbos HTTP para controllers
+
+frontend/
+├── index.html                  # Tela inicial com painel de resumo
+├── css/style.css
+├── js/
+│   ├── main.js                 # Funções compartilhadas e helper de fetch
+│   ├── participantes.js
+│   ├── oficinas.js
+│   ├── presencas.js
+│   └── progressos.js
+└── pages/
+    ├── participantes.html
+    ├── oficinas.html
+    ├── presencas.html
+    └── progressos.html
+```
+
+---
+
+## Rotas da API
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| GET | `/api/participantes` | Lista todos os participantes |
-| POST | `/api/participantes` | Cria um participante |
-| PUT | `/api/participantes/:id` | Atualiza um participante |
-| DELETE | `/api/participantes/:id` | Remove um participante |
-| GET | `/api/oficinas` | Lista todas as oficinas |
-| POST | `/api/oficinas` | Cria uma oficina |
-| PUT | `/api/oficinas/:id` | Atualiza uma oficina |
-| DELETE | `/api/oficinas/:id` | Remove uma oficina |
-| GET | `/api/presencas/oficina/:id` | Presenças de uma oficina |
-| GET | `/api/presencas/participante/:id` | Presenças de um participante |
-| POST | `/api/presencas` | Registra uma presença |
-| DELETE | `/api/presencas/:id` | Remove um registro de presença |
+| GET | `/api/participantes` | Lista (aceita `?nome=` para filtrar) |
+| GET | `/api/participantes/:id` | Busca por ID |
+| POST | `/api/participantes` | Cria participante |
+| PUT | `/api/participantes/:id` | Atualiza participante |
+| DELETE | `/api/participantes/:id` | Remove participante |
+| GET | `/api/oficinas` | Lista (aceita `?titulo=` para filtrar) |
+| GET | `/api/oficinas/:id` | Busca por ID |
+| POST | `/api/oficinas` | Cria oficina |
+| PUT | `/api/oficinas/:id` | Atualiza oficina |
+| DELETE | `/api/oficinas/:id` | Remove oficina |
+| GET | `/api/presencas` | Lista todas as presenças |
+| GET | `/api/presencas/oficina/:oficinaId` | Presenças de uma oficina |
+| GET | `/api/presencas/participante/:participanteId` | Presenças de um participante |
+| POST | `/api/presencas` | Registra presença |
+| DELETE | `/api/presencas/:id` | Remove presença |
+| GET | `/api/progressos` | Lista todos os progressos |
+| GET | `/api/progressos/:id` | Busca por ID |
+| GET | `/api/progressos/participante/:participanteId` | Progressos de um participante |
+| GET | `/api/progressos/oficina/:oficinaId` | Progressos de uma oficina |
+| POST | `/api/progressos` | Cria progresso |
+| PUT | `/api/progressos/:id` | Atualiza progresso |
+| DELETE | `/api/progressos/:id` | Remove progresso |
 
-> Os dados são mantidos em memória e são resetados ao reiniciar o servidor.
+---
 
 ## Avaliação
 

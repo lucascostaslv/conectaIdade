@@ -2,3 +2,5 @@
 CLAUDE.md
 node_modules/
 roteiro_video.txt
+backend/.env
+backend/database.sqlite
